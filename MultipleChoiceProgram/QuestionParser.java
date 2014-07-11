@@ -1,3 +1,5 @@
+package MultipleChoiceProgram;
+
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
@@ -54,7 +56,7 @@ public class QuestionParser {
 				choices,
 				answerIndex
 			);
-
+		/*
 		String imgResource = scanner.nextLine();
 		//figure is optional
 		if(imgResource.startsWith("Figure: ")) {
@@ -71,6 +73,7 @@ public class QuestionParser {
 			imgResource = imgResource.substring(6).trim();
 			questionObj.setFact(imgResource);
 		}
+		*/
 
 		return questionObj;
 	}

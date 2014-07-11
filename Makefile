@@ -1,14 +1,19 @@
+PKG=MultipleChoiceProgram
 GSON=google-gson-2.2.4/gson-2.2.4.jar
 CFLAGS=-cp .:$(GSON)
 
-all: Main.java
-	javac $(CFLAGS) Main.java
+all: $(PKG)/Main.java
+	javac $(CFLAGS) MultipleChoiceProgram/Main.java
+	jar cfm MultipleChoiceProgram.jar Manifest.txt $(PKG)/*.class
 
-convert: Converter.java
-	javac $(CFLAGS) Converter.java
+convert: $(PKG)/Converter.java
+	javac $(CFLAGS) $(PKG)/Converter.java
 
-runconvert: Converter.class
+runconvert: $(PKG)/Converter.class
 	java $(CFLAGS) Converter
 
-run: Main.class
-	java $(CFLAGS) Main
+run: MultipleChoiceProgram.jar
+	java -jar MultipleChoiceProgram.jar
+
+clean:
+	$(RM) $(PKG)/*.class

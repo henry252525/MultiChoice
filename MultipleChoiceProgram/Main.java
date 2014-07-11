@@ -1,3 +1,5 @@
+package MultipleChoiceProgram;
+
 import java.util.*;
 import java.io.*;
 import java.lang.reflect.*;
