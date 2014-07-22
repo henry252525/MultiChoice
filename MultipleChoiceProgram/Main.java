@@ -27,16 +27,17 @@ public class Main {
 			}
 		} else {
 			try {
-				Scanner scanner = new Scanner(new File("26"));
+				Scanner scanner = new Scanner(new File("resources/testcases.json"));
 				String json = scanner.useDelimiter("\\Z").next();
 				scanner.close();
 				Gson gson = new Gson();
 				Type listType = new TypeToken<ArrayList<MultipleChoiceQuestion>>() {
 		              	      }.getType();
-				ArrayList<MultipleChoiceQuestion> q26 = gson.fromJson(json, listType);
-				questions.addAll(q26);
+				ArrayList<MultipleChoiceQuestion> selectedQuestions = gson.fromJson(json, listType);
+				questions.addAll(selectedQuestions);
 			} catch (Exception e) {
 				//TODO: Handle file not found
+				System.out.println(e);
 				return;
 			}
 		}

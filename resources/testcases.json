@@ -1,0 +1,36 @@
+[
+  {
+    "question": "This is question 1. Who is super awesome?",
+    "choices": [
+      "Superman",
+      "Goku",
+      "Pikachu",
+      "Henry",
+      "Bruce Lee"
+    ],
+    "answerIndex": 3
+  },
+  {
+    "question": "Refer to the image below. How awesome is it? (question 2 btw)",
+    "choices": [
+      "2/10",
+      "21/10",
+      "8/10",
+      "ewwww",
+      "awesome level OVER 9000!!!"
+    ],
+    "answerIndex": 1,
+    "extImagePath": "TestCases/question2.png"
+  },
+  {
+    "question": "This is just for fun. Question 3, this is. Last answer is correct",
+    "choices": [
+      "WAIIIIT",
+      "WAIIIIT",
+      "WAIIIIT",
+      "WAIIIIT",
+      "WAIIIIT"
+    ],
+    "answerIndex": 4
+  }
+]

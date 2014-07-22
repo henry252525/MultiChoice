@@ -7,6 +7,8 @@ import javax.imageio.*;
 
 public class MultipleChoiceQuestion {
 
+	public static final String resourceDirectory = "resources/";
+
 	private String question;
 	private ArrayList<String> choices;
 	private int answerIndex;
@@ -37,7 +39,7 @@ public class MultipleChoiceQuestion {
 	public Image getExtImage() {
 		Image extImage = null;
 		try { // TODO: create a service to cache images
-			extImage = ImageIO.read(new File(this.extImagePath));
+			extImage = ImageIO.read(new File(resourceDirectory + this.extImagePath));
 		} catch (Exception e) {
 		}
 		return extImage;
