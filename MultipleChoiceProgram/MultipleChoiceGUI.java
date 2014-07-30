@@ -14,7 +14,7 @@ public class MultipleChoiceGUI extends JFrame {
 	private ArrayList<MultipleChoiceQuestion> questions;
 	private JTextArea questionTextArea = new JTextArea();
 	private JButton[] choiceButtons = new JButton[5];
-	private JLabel figureLabel = new JLabel();
+	private ImagePanel imagePanel = new ImagePanel();
 
 	private JButton nextButton = new JButton("Next");
 	private JButton prevButton = new JButton("Prev");
@@ -71,7 +71,7 @@ public class MultipleChoiceGUI extends JFrame {
 			centerSouthPanel.add(choiceButtons[i]);
 		}
 		centerPanel.add(centerSouthPanel, BorderLayout.SOUTH);
-		centerPanel.add(this.figureLabel, BorderLayout.CENTER);
+		centerPanel.add(this.imagePanel, BorderLayout.CENTER);
 
 		this.questionTextArea.setLineWrap(true);
 		this.questionTextArea.setWrapStyleWord(true);
@@ -161,11 +161,7 @@ public class MultipleChoiceGUI extends JFrame {
 		this.currentAnswerIndex = question.getAnswerIndex();
 
 		Image extImage = question.getExtImage();
-		if(extImage != null) {
-			this.figureLabel.setIcon(new ImageIcon(question.getExtImage()));
-		} else {
-			this.figureLabel.setIcon(null);
-		}
+		this.imagePanel.setImage(extImage);
 	}
 
 	private void updateButtonChoice(JButton button, String choice, int index) {
@@ -203,14 +199,17 @@ public class MultipleChoiceGUI extends JFrame {
 	private void choiceButtonAction(int index) {
 		if(index == this.currentAnswerIndex) {
 			JOptionPane.showMessageDialog(this, "Correct!");
+			/*
 			try {
 				ImageIcon corgif = new ImageIcon(new URL("http://corgifs.herokuapp.com"));
 				this.figureLabel.setIcon(corgif);
 			} catch(Exception e) {
 				System.out.println("Unable to load corgif");
 			}
+			*/
 		} else {
 			JOptionPane.showMessageDialog(this, "Wrong! The correct answer is: " + (this.currentAnswerIndex + 1));
+			/*
 			try {
 				if(this.wrongImg == null) {
 					this.wrongImg = new ImageIcon(ImageIO.read(new File("Images/wrong.jpg")));
@@ -219,6 +218,7 @@ public class MultipleChoiceGUI extends JFrame {
 			} catch(Exception e) {
 				System.out.println("Unable to load integrals");
 			}
+			*/
 		}
 	}
 }
