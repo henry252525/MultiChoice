@@ -199,14 +199,21 @@ public class MultipleChoiceGUI extends JFrame {
 	private void choiceButtonAction(int index) {
 		if(index == this.currentAnswerIndex) {
 			JOptionPane.showMessageDialog(this, "Correct!");
-			/*
+			int num = this.r.nextInt(100) + 1;
+			String path = "Images/correct/%d.gif";
 			try {
-				ImageIcon corgif = new ImageIcon(new URL("http://corgifs.herokuapp.com"));
-				this.figureLabel.setIcon(corgif);
+				ImageIcon corgif;
+				try {
+					corgif = new ImageIcon(String.format(path, num));
+				} catch(Exception e) {
+					corgif = new ImageIcon(new URL("http://corgifs.herokuapp.com"));
+				}
+				Image image = corgif.getImage();
+				image.setAccelerationPriority(1);
+				this.imagePanel.setImage(image);
 			} catch(Exception e) {
 				System.out.println("Unable to load corgif");
 			}
-			*/
 		} else {
 			JOptionPane.showMessageDialog(this, "Wrong! The correct answer is: " + (this.currentAnswerIndex + 1));
 			if(this.wrongImg == null) {

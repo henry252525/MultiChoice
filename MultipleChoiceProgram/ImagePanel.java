@@ -33,7 +33,7 @@ public class ImagePanel extends JPanel {
 				0,
 				imageWidth,
 				imageHeight,
-				null
+				this
 			);
 	}
 
