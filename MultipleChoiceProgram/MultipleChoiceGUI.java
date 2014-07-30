@@ -28,7 +28,7 @@ public class MultipleChoiceGUI extends JFrame {
 
 	private int currentQuestionIndex = 0;
 
-	private ImageIcon wrongImg;
+	private Image wrongImg;
 
 	public MultipleChoiceGUI(ArrayList<MultipleChoiceQuestion> questions) {
 		//Assert that questions != null and questions.size > 0
@@ -209,16 +209,14 @@ public class MultipleChoiceGUI extends JFrame {
 			*/
 		} else {
 			JOptionPane.showMessageDialog(this, "Wrong! The correct answer is: " + (this.currentAnswerIndex + 1));
-			/*
-			try {
-				if(this.wrongImg == null) {
-					this.wrongImg = new ImageIcon(ImageIO.read(new File("Images/wrong.jpg")));
+			if(this.wrongImg == null) {
+				try {
+					this.wrongImg = ImageIO.read(new File("Images/wrong.jpg"));
+				} catch(Exception e) {
+					System.out.println("Unable to load integrals");
 				}
-				this.figureLabel.setIcon(wrongImg);
-			} catch(Exception e) {
-				System.out.println("Unable to load integrals");
 			}
-			*/
+			this.imagePanel.setImage(wrongImg);
 		}
 	}
 }
