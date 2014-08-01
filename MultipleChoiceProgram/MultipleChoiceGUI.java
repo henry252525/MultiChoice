@@ -199,7 +199,7 @@ public class MultipleChoiceGUI extends JFrame {
 	private void choiceButtonAction(int index) {
 		if(index == this.currentAnswerIndex) {
 			JOptionPane.showMessageDialog(this, "Correct!");
-			int num = this.r.nextInt(100) + 1;
+			int num = this.r.nextInt(61);
 			String path = "Images/correct/%d.gif";
 			try {
 				ImageIcon corgif;
