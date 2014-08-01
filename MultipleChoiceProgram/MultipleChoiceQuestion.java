@@ -12,7 +12,7 @@ public class MultipleChoiceQuestion {
 	private String question;
 	private ArrayList<String> choices;
 	private int answerIndex;
-	private String extImagePath;
+	public String extImagePath;
 
 	public MultipleChoiceQuestion(
 			String question,

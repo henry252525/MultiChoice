@@ -56,24 +56,23 @@ public class QuestionParser {
 				choices,
 				answerIndex
 			);
-		/*
+		
 		String imgResource = scanner.nextLine();
 		//figure is optional
 		if(imgResource.startsWith("Figure: ")) {
 			imgResource = imgResource.substring(8).trim();
-			questionObj.setFigure(imgResource);
+			questionObj.extImagePath = "Figures/" + imgResource + ".png";
 		}
 		//table is optional
 		else if(imgResource.startsWith("Table: ")) {
 			imgResource = imgResource.substring(7).trim();
-			questionObj.setTable(imgResource);
+			questionObj.extImagePath = "Tables/" + imgResource + ".png";
 		}
 		//fact is optional
 		else if(imgResource.startsWith("Fact: ")) {
 			imgResource = imgResource.substring(6).trim();
-			questionObj.setFact(imgResource);
+			questionObj.extImagePath = "Facts/" + imgResource + ".png";
 		}
-		*/
 
 		return questionObj;
 	}

@@ -11,7 +11,7 @@ convert: $(PKG)/Converter.java
 	javac $(CFLAGS) $(PKG)/Converter.java
 
 runconvert: $(PKG)/Converter.class
-	java $(CFLAGS) Converter
+	java $(CFLAGS) $(PKG)/Converter
 
 run: MultipleChoiceProgram.jar
 	java -jar MultipleChoiceProgram.jar
