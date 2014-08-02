@@ -21,6 +21,7 @@ public class MultipleChoiceGUI extends JFrame {
 	private JButton pageButton = new JButton("Go to page");
 
 	private JCheckBox randomCB = new JCheckBox("Random?", false);
+	private JCheckBox imageFeedbackCB = new JCheckBox("Image Feedback?", true);
 
 	private int currentAnswerIndex;
 
@@ -60,6 +61,7 @@ public class MultipleChoiceGUI extends JFrame {
 		northPanel.add(scrollPane, BorderLayout.CENTER);
 		//south
 		southPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		southPanel.add(imageFeedbackCB);
 		southPanel.add(randomCB);
 		southPanel.add(pageButton);
 		southPanel.add(prevButton);
@@ -199,6 +201,10 @@ public class MultipleChoiceGUI extends JFrame {
 	private void choiceButtonAction(int index) {
 		if(index == this.currentAnswerIndex) {
 			JOptionPane.showMessageDialog(this, "Correct!");
+			if(!this.imageFeedbackCB.isSelected()) {
+				this.loadNextQuestion();
+				return;
+			}
 			int num = this.r.nextInt(62);
 			String path = "Images/correct/%d.gif";
 			try {
@@ -216,6 +222,9 @@ public class MultipleChoiceGUI extends JFrame {
 			}
 		} else {
 			JOptionPane.showMessageDialog(this, "Wrong! The correct answer is: " + (this.currentAnswerIndex + 1));
+			if(!this.imageFeedbackCB.isSelected()) {
+				return;
+			}
 			if(this.wrongImg == null) {
 				try {
 					this.wrongImg = ImageIO.read(new File("Images/wrong.jpg"));
