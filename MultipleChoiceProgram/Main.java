@@ -36,8 +36,19 @@ public class Main {
 	}
 
 	public static String[] getQuestionFilenames() {
-		return new String[] {
-			"resources/testcases.json"
-		};
+		String[] questionFilenames;
+		try {
+			Scanner scanner = new Scanner(new File("resources/questions.dat"));
+			ArrayList<String> questions = new ArrayList<String>();
+			while(scanner.hasNextLine()) {
+				questions.add(scanner.nextLine().trim());
+			}
+			questionFilenames = questions.toArray(new String[questions.size()]);
+		} catch(Exception e) {
+			questionFilenames = new String[] {
+				"resources/testcases.json"
+			};
+		}
+		return questionFilenames;
 	}
 }
