@@ -199,40 +199,49 @@ public class MultipleChoiceGUI extends JFrame {
 	}
 
 	private void choiceButtonAction(int index) {
-		if(index == this.currentAnswerIndex) {
-			JOptionPane.showMessageDialog(this, "Correct!");
-			if(!this.imageFeedbackCB.isSelected()) {
-				this.loadNextQuestion();
-				return;
-			}
-			int num = this.r.nextInt(62);
-			String path = "Images/correct/%d.gif";
-			try {
-				ImageIcon corgif;
+		boolean correctAnswer = index == this.currentAnswerIndex;
+		boolean isImageFeedback = this.imageFeedbackCB.isSelected();
+		boolean autoNextQuestion;
+		String feedbackMessage;
+		Image imageFeedback = null;
+
+		if(correctAnswer) {
+			feedbackMessage = "Correct!";
+			autoNextQuestion = !isImageFeedback;
+			if(isImageFeedback) {
+				int num = this.r.nextInt(62);
+				String path = "Images/correct/%d.gif";
 				try {
-					corgif = new ImageIcon(String.format(path, num));
+					ImageIcon corgif;
+					try {
+						corgif = new ImageIcon(String.format(path, num));
+					} catch(Exception e) {
+						corgif = new ImageIcon(new URL("http://corgifs.herokuapp.com"));
+					}
+					imageFeedback = corgif.getImage();
 				} catch(Exception e) {
-					corgif = new ImageIcon(new URL("http://corgifs.herokuapp.com"));
+					System.out.println("Unable to load corgif");
 				}
-				Image image = corgif.getImage();
-				image.setAccelerationPriority(1);
-				this.imagePanel.setImage(image);
-			} catch(Exception e) {
-				System.out.println("Unable to load corgif");
 			}
 		} else {
-			JOptionPane.showMessageDialog(this, "Wrong! The correct answer is: " + (this.currentAnswerIndex + 1));
-			if(!this.imageFeedbackCB.isSelected()) {
-				return;
-			}
-			if(this.wrongImg == null) {
+			feedbackMessage = "Wrong! The correct answer is: " + (char)(this.currentAnswerIndex + 65);
+			autoNextQuestion = false;
+			if(isImageFeedback && this.wrongImg == null) {
 				try {
 					this.wrongImg = ImageIO.read(new File("Images/wrong.jpg"));
 				} catch(Exception e) {
 					System.out.println("Unable to load integrals");
 				}
 			}
-			this.imagePanel.setImage(wrongImg);
+			imageFeedback = this.wrongImg;
+		}
+		JOptionPane.showMessageDialog(this, feedbackMessage);
+		if(autoNextQuestion) {
+			this.loadNextQuestion();
+			return;
+		}
+		if(isImageFeedback && imageFeedback != null) {
+			this.imagePanel.setImage(imageFeedback);
 		}
 	}
 }
