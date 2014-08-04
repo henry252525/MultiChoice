@@ -219,7 +219,7 @@ public class MultipleChoiceGUI extends JFrame {
 			feedbackMessage = "Correct!";
 			autoNextQuestion = !isImageFeedback;
 			if(isImageFeedback) {
-				int num = this.r.nextInt(62);
+				int num = this.r.nextInt(63);
 				String path = "Images/correct/%d.gif";
 				try {
 					ImageIcon corgif;
