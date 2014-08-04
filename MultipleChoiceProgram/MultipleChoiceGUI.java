@@ -19,6 +19,7 @@ public class MultipleChoiceGUI extends JFrame {
 	private JButton nextButton = new JButton("Next");
 	private JButton prevButton = new JButton("Prev");
 	private JButton pageButton = new JButton("Go to page");
+	private JButton fiftyFiftyButton = new JButton("50/50");
 
 	private JCheckBox randomCB = new JCheckBox("Random?", false);
 	private JCheckBox imageFeedbackCB = new JCheckBox("Image Feedback?", true);
@@ -61,6 +62,7 @@ public class MultipleChoiceGUI extends JFrame {
 		northPanel.add(scrollPane, BorderLayout.CENTER);
 		//south
 		southPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		southPanel.add(fiftyFiftyButton);
 		southPanel.add(imageFeedbackCB);
 		southPanel.add(randomCB);
 		southPanel.add(pageButton);
@@ -115,6 +117,12 @@ public class MultipleChoiceGUI extends JFrame {
 				}
 			});
 		}
+
+		this.fiftyFiftyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MultipleChoiceGUI.this.fiftyFiftyButtonAction();
+			}
+		});
 	}
 
 	private void loadNextQuestion() {
@@ -164,6 +172,8 @@ public class MultipleChoiceGUI extends JFrame {
 
 		Image extImage = question.getExtImage();
 		this.imagePanel.setImage(extImage);
+
+		this.fiftyFiftyButton.setEnabled(true);
 	}
 
 	private void updateButtonChoice(JButton button, String choice, int index) {
@@ -243,5 +253,20 @@ public class MultipleChoiceGUI extends JFrame {
 		if(isImageFeedback && imageFeedback != null) {
 			this.imagePanel.setImage(imageFeedback);
 		}
+	}
+
+	public void fiftyFiftyButtonAction() {
+		int numChoices = this.questions.get(currentQuestionIndex).getChoices().size();
+		int numToKillOff = numChoices / 2;
+		int numKilledOff = 0;
+
+		while(numKilledOff < numToKillOff) {
+			int toKill = this.r.nextInt(numChoices);
+			if(toKill != this.currentAnswerIndex && this.choiceButtons[toKill].isEnabled()) {
+				this.choiceButtons[toKill].setEnabled(false);
+				numKilledOff++;
+			}
+		}
+		this.fiftyFiftyButton.setEnabled(false);
 	}
 }
