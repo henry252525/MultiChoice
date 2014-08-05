@@ -21,6 +21,7 @@ public class MultipleChoiceGUI extends JFrame {
 	private JButton pageButton = new JButton("Go to page");
 	private JButton fiftyFiftyButton = new JButton("50/50");
 
+	private JCheckBox crazyAutoAnswerCB = new JCheckBox("Crazy Automatic Answer Mode", false);
 	private JCheckBox randomCB = new JCheckBox("Random?", false);
 	private JCheckBox imageFeedbackCB = new JCheckBox("Image Feedback?", true);
 
@@ -63,6 +64,7 @@ public class MultipleChoiceGUI extends JFrame {
 		//south
 		southPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		southPanel.add(fiftyFiftyButton);
+		southPanel.add(crazyAutoAnswerCB);
 		southPanel.add(imageFeedbackCB);
 		southPanel.add(randomCB);
 		southPanel.add(pageButton);
@@ -85,6 +87,12 @@ public class MultipleChoiceGUI extends JFrame {
 	}
 
 	private void registerListeners() {
+		this.crazyAutoAnswerCB.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				MultipleChoiceGUI.this.crazyAutoAnswerCBAction();
+			}
+		});
+
 		this.randomCB.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				MultipleChoiceGUI.this.randomCBAction();
@@ -174,6 +182,9 @@ public class MultipleChoiceGUI extends JFrame {
 		this.imagePanel.setImage(extImage);
 
 		this.fiftyFiftyButton.setEnabled(true);
+		if(crazyAutoAnswerCB.isSelected()) {
+			this.highlightCorrectAnswer();
+		}
 	}
 
 	private void updateButtonChoice(JButton button, String choice, int index) {
@@ -202,6 +213,19 @@ public class MultipleChoiceGUI extends JFrame {
 			JOptionPane.showMessageDialog(this, "Fuck you!");
 			return;
 		}
+	}
+
+	private void crazyAutoAnswerCBAction() {
+		if(crazyAutoAnswerCB.isSelected()) {
+			this.highlightCorrectAnswer();
+		}
+	}
+
+	private void highlightCorrectAnswer() {
+		for(int i = 0; i < this.choiceButtons.length; i++) {
+			this.choiceButtons[i].setEnabled(false);
+		}
+		this.choiceButtons[this.currentAnswerIndex].setEnabled(true);
 	}
 
 	private void randomCBAction() {
