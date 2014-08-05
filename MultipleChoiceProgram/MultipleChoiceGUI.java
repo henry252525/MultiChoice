@@ -218,9 +218,17 @@ public class MultipleChoiceGUI extends JFrame {
 	private void crazyAutoAnswerCBAction() {
 		if(crazyAutoAnswerCB.isSelected()) {
 			this.highlightCorrectAnswer();
+		} else {
+			this.enableChoices();
 		}
 	}
 
+	private void enableChoices() {
+		for(int i = 0; i < this.choiceButtons.length; i++) {
+			this.choiceButtons[i].setEnabled(true);
+		}
+	}
+	
 	private void highlightCorrectAnswer() {
 		for(int i = 0; i < this.choiceButtons.length; i++) {
 			this.choiceButtons[i].setEnabled(false);
